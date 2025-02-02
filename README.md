@@ -50,36 +50,38 @@ Supports generating the following types of Bitcoin addresses:
 
 **1. Install dependencies on Ubuntu/Debian:**
 -
--
+```sh
 sudo apt-get install libgmp-dev libssl-dev
-
+```
 
 Markdown
 2. Compile the code:
--
+```sh
 gcc -O3 -o key key.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c ecc/ecc.c customutil/customutil.c -lgmp
-
+```
 
 or
--
+```sh
 make
-
+```
 
 ###🚀 Usage
 After successful compilation, you can run the tool from the command line, passing the private key (hexadecimal or WIF format) as an argument:
 -
+```sh
 
 ./key <Private Key (Hex or WIF)>
 
-
+```
 ### Example
 Input hexadecimal private key
+```sh
 
 ./key 0000000000000000000000000000000000000000000000000000000000000001
--
 
+```
 Output:
-
+```sh
 **Raw Private Key (Hex): 0000000000000000000000000000000000000000000000000000000000000001
 **WIF Private Key: KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9M7rFU73sVHnoWn
 
@@ -103,10 +105,11 @@ Output:
 **-Bech32m (Starts with bc1p) Address (Uncompressed): bc1pjxeyh7049zzn99s2c6r6hvp4zfa362994nkhzu
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1q2zffkaxp5py4fdutfdsrt6t6tcrc5ks09rkfd428hlhf4n5q8tqqym7502 (P2WSH => P2PKH)
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1qdrvr7pa25ayvpxt7yymdkktur98exqj59ydpcvs2sszxqks957vqqrrv3q (P2WSH => P2WPKH)
-
+```
 ### Input WIF format private key
-
+```sh
 ./key 5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf
+
 -
 Output:
 **-WIF Private Key: 5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf
@@ -131,7 +134,7 @@ Output:
 **-Bech32m (Starts with bc1p) Address (Uncompressed): bc1pjxeyh7049zzn99s2c6r6hvp4zfa362994nkhzu
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1q2zffkaxp5py4fdutfdsrt6t6tcrc5ks09rkfd428hlhf4n5q8tqqym7502 (P2WSH => P2PKH)
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1qdrvr7pa25ayvpxt7yymdkktur98exqj59ydpcvs2sszxqks957vqqrrv3q (P2WSH => P2WPKH)
-
+```
 
 ### 📂 Code Structure
 
@@ -177,5 +180,5 @@ If this project has been helpful to you, please consider sponsoring. Your suppor
 ### 📜 Disclaimer
 -⚠️ Reminder: Do not input real private keys on connected devices!
 -
--This tool is provided for learning and research purposes only. Please use it with an understanding of the relevant risks. The developers are not responsible for financial losses or legal liability ----caused by the use of this tool.
+-This tool is provided for learning and research purposes only. Please use it with an understanding of the relevant risks. The developers are not responsible for financial losses or legal liability -caused by the use of this tool.
 -
