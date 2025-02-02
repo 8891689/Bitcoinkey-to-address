@@ -154,9 +154,7 @@ File Description
 -
 **customutil/customutil.c & customutil/customutil.h: Custom functions for generating public key strings.
 -
-### ⚠️ Notes
-
-⚠️ Security
+### ⚠️ Security
 Please use this tool with caution, especially with private key generation and handling. Please run it in an offline or secure environment and avoid disclosing your private keys!
 
 Private key disclosure will lead to loss of funds! Please store and manage your keys securely.
@@ -177,8 +175,8 @@ If this project has been helpful to you, please consider sponsoring. Your suppor
 -
 -TRX: TAHUmjyzg7B3Nndv264zWYUhQ9HUmX4Xu4
 -
-### 📜 Disclaimer
--⚠️ Reminder: Do not input real private keys on connected devices!
+-
+### ⚠️ Reminder: Do not input real private keys on connected devices!
 -
 -This tool is provided for learning and research purposes only. Please use it with an understanding of the relevant risks. The developers are not responsible for financial losses or legal liability -caused by the use of this tool.
 -
