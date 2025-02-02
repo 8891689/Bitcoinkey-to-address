@@ -5,7 +5,7 @@
  * gcc -o base58_example base58_example.c -lcrypto
  * 实现了 Base58 编码／解码以及 Base58Check 编码／解码。
  * 此代码使用了 OpenSSL 库来计算 SHA256 校验和，因此编译时需要链接 OpenSSL
- * 作者：ChatGPT
+ * 作者：8891689/ChatGPT
  */
 
 #include <stdio.h>
