@@ -36,7 +36,6 @@ Supports generating the following types of Bitcoin addresses:
 ## 🛠️ Dependencies
 
 -   **GMP (GNU Multiple Precision Arithmetic Library):** Used for large number arithmetic.
--   **OpenSSL (or compatible alternative library):** Used for the SHA256 hash algorithm.
 
 ### Custom Modules:
 
@@ -45,6 +44,7 @@ Supports generating the following types of Bitcoin addresses:
 -  ** `bech32`
 -  ** `ecc`
 -  ** `customutil`
+-  ** `sha256`
 
 ## 🔨 Compilation and Installation
 
