@@ -135,6 +135,24 @@ Output:
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1q2zffkaxp5py4fdutfdsrt6t6tcrc5ks09rkfd428hlhf4n5q8tqqym7502 (P2WSH => P2PKH)
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1qdrvr7pa25ayvpxt7yymdkktur98exqj59ydpcvs2sszxqks957vqqrrv3q (P2WSH => P2WPKH)
 ```
+If you need the main address or simple output, please replace the simple C file, or cancel the redundant address output.
+```sh
+./key 1
+WIF Private Key (Compressed): KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9M7rFU73sVHnoWn
+WIF Private Key (Uncompressed): 5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf
+Compressed Public Key: 0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
+Uncompressed Public Key: 0479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
+=== Addresses Generated from Compressed Public Key ===
+P2PKH (Starts with 1) Address (Compressed): 1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+P2SH (Starts with 3) Address (Compressed): 3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN (P2SH => P2WPKH)
+Bech32 (Starts with bc1) Address (Compressed): bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4
+=== Addresses Generated from Uncompressed Public Key ===
+P2PKH (Starts with 1) Address (Uncompressed): 1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
+P2SH (Starts with 3) Address (Uncompressed): 33q2i3GDkpHFAXnD3UdBsKhxzg7pvwAqtN (P2SH => P2WPKH)
+Bech32 (Starts with bc1) Address (Uncompressed): bc1qjxeyh7049zzn99s2c6r6hvp4zfa362997dpu0h
+
+```
+
 
 ### 📂 Code Structure
 
