@@ -275,19 +275,36 @@ int main(int argc, char **argv) {
         printf("WIF Private Key: %s\n", input_key);
         printf("Raw Private Key (Hex): %s\n", priv_hex);
     } else {
-        if (strlen(input_key) != 64) {
+        // 当输入长度不足 64 时左侧补零
+        if (strlen(input_key) < 64) {
+            char padded[65] = {0};
+            int pad = 64 - strlen(input_key);
+            memset(padded, '0', pad);
+            strcpy(padded + pad, input_key);
+            strcpy(priv_hex, padded);
+        } else if (strlen(input_key) == 64) {
+            strcpy(priv_hex, input_key);
+        } else {
             fprintf(stderr, "无效的私钥 hex 长度，应为 64 字符\n");
             return 1;
         }
-        strcpy(priv_hex, input_key);
-        compressed_flag = true;  // 默认压缩
-        if (private_key_to_wif(priv_hex, compressed_flag, wif, sizeof(wif)) != 0) {
-            fprintf(stderr, "私钥转换为 WIF 失败\n");
+        
+        char wif_compressed[100] = {0};
+        char wif_uncompressed[100] = {0};
+
+        if (private_key_to_wif(priv_hex, true, wif_compressed, sizeof(wif_compressed)) != 0) {
+            fprintf(stderr, "私钥转换为压缩 WIF 失败\n");
             return 1;
         }
-        printf("Raw Private Key (Hex): %s\n", priv_hex);
-        printf("WIF Private Key: %s\n", wif);
+        if (private_key_to_wif(priv_hex, false, wif_uncompressed, sizeof(wif_uncompressed)) != 0) {
+            fprintf(stderr, "私钥转换为非压缩 WIF 失败\n");
+            return 1;
+        }
+
+        printf("WIF Private Key (Compressed): %s\n", wif_compressed);
+        printf("WIF Private Key (Uncompressed): %s\n", wif_uncompressed);
     }
+
     
     /* 由私钥计算公钥 */
     mpz_t priv;
