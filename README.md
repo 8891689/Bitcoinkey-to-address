@@ -1,5 +1,5 @@
 # Bitcoinkey-to-address
-This C language tool can generate public keys from Bitcoin private keys and generate multiple address formats including P2PKH, P2SH and SegWit. It uses efficient and secure cryptography and encoding algorithms and supports hexadecimal and WIF format private keys.
+This C language tool converts Bitcoin private key or public key or public key hash 160, calculates various addresses, including P2PKH, P2SH, SegWit and other formats, and supports conversion between hexadecimal and WIF formats of private keys.
 
 ## 📌 Project Overview
 
@@ -58,13 +58,15 @@ Markdown
 2. Compile the code:
 ```sh
 gcc -O3 -o key key.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c ecc/ecc.c customutil/customutil.c -lgmp
+gcc -O3 -o simple simple.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c ecc/ecc.c customutil/customutil.c -lgmp
+gcc -O3 -o public public.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c ecc/ecc.c customutil/customutil.c -lgmp
+gcc -O3 -o hash160 hash160.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c ecc/ecc.c customutil/customutil.c -lgmp
 ```
-
 or
 ```sh
 make
-```
 
+```
 ###🚀 Usage
 After successful compilation, you can run the tool from the command line, passing the private key (hexadecimal or WIF format) as an argument:
 -
@@ -135,9 +137,9 @@ Output:
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1q2zffkaxp5py4fdutfdsrt6t6tcrc5ks09rkfd428hlhf4n5q8tqqym7502 (P2WSH => P2PKH)
 **-P2WSH (Starts with bc1) Address (Uncompressed): bc1qdrvr7pa25ayvpxt7yymdkktur98exqj59ydpcvs2sszxqks957vqqrrv3q (P2WSH => P2WPKH)
 ```
-If you need the main address or simple output, please replace the simple C file, or cancel the redundant address output.
+###  If primary address or simple output is required, use the simple output procedure, or cancel redundant address output.
 ```sh
-./key 1
+./simple 1
 WIF Private Key (Compressed): KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9M7rFU73sVHnoWn
 WIF Private Key (Uncompressed): 5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf
 Compressed Public Key: 0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
@@ -151,11 +153,80 @@ P2PKH (Starts with 1) Address (Uncompressed): 1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
 P2SH (Starts with 3) Address (Uncompressed): 33q2i3GDkpHFAXnD3UdBsKhxzg7pvwAqtN (P2SH => P2WPKH)
 Bech32 (Starts with bc1) Address (Uncompressed): bc1qjxeyh7049zzn99s2c6r6hvp4zfa362997dpu0h
 
+
+```
+###  BTC public key calculates various addresses.
+```sh
+
+Compressed Public
+
+./public 0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
+Compressed Public Key:   0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
+Uncompressed Public Key: 0479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
+
+=== Addresses Generated Using Compressed Public Key ===
+P2PKH:       1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+P2SH:        3CNHUhP3uyB9EUtRLsmvFUmvGdjGdkTxJw
+P2SH-P2WPKH: 3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN
+Bech32:      bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4
+Bech32m:     bc1pw508d6qejxtdg4y5r3zarvary0c5xw7k8e76x7
+P2WSH:       bc1qpac4ht6afshdx2tctnhjnetz7u6g3j9zhwwmc4cqkdsa2jumq42qd3drf7
+P2WSH-P2WPKH:bc1q3qu0094lf9ctzjrhnszmwjuvf9g4kv3dqsp47la2tkdjxawlywtqs5vvrc
+
+=== Addresses Generated Using Uncompressed Public Key ===
+P2PKH:       1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
+P2SH:        3EyPVdtVrtMJ1XwPT9oiBrQysGpRY8LE9K
+P2SH-P2WPKH: 33q2i3GDkpHFAXnD3UdBsKhxzg7pvwAqtN
+Bech32:      bc1qjxeyh7049zzn99s2c6r6hvp4zfa362997dpu0h
+Bech32m:     bc1pjxeyh7049zzn99s2c6r6hvp4zfa362994nkhzu
+P2WSH:       bc1q2zffkaxp5py4fdutfdsrt6t6tcrc5ks09rkfd428hlhf4n5q8tqqym7502
+P2WSH-P2WPKH:bc1qdrvr7pa25ayvpxt7yymdkktur98exqj59ydpcvs2sszxqks957vqqrrv3q
+
+Uncompressed Public
+
+./public 0479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
+Compressed Public Key:   0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
+Uncompressed Public Key: 0479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
+
+=== Addresses Generated Using Compressed Public Key ===
+P2PKH:       1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+P2SH:        3CNHUhP3uyB9EUtRLsmvFUmvGdjGdkTxJw
+P2SH-P2WPKH: 3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN
+Bech32:      bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4
+Bech32m:     bc1pw508d6qejxtdg4y5r3zarvary0c5xw7k8e76x7
+P2WSH:       bc1qpac4ht6afshdx2tctnhjnetz7u6g3j9zhwwmc4cqkdsa2jumq42qd3drf7
+P2WSH-P2WPKH:bc1q3qu0094lf9ctzjrhnszmwjuvf9g4kv3dqsp47la2tkdjxawlywtqs5vvrc
+
+=== Addresses Generated Using Uncompressed Public Key ===
+P2PKH:       1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm
+P2SH:        3EyPVdtVrtMJ1XwPT9oiBrQysGpRY8LE9K
+P2SH-P2WPKH: 33q2i3GDkpHFAXnD3UdBsKhxzg7pvwAqtN
+Bech32:      bc1qjxeyh7049zzn99s2c6r6hvp4zfa362997dpu0h
+Bech32m:     bc1pjxeyh7049zzn99s2c6r6hvp4zfa362994nkhzu
+P2WSH:       bc1q2zffkaxp5py4fdutfdsrt6t6tcrc5ks09rkfd428hlhf4n5q8tqqym7502
+P2WSH-P2WPKH:bc1qdrvr7pa25ayvpxt7yymdkktur98exqj59ydpcvs2sszxqks957vqqrrv3q
+
+
+
 ```
 
+### The public key hash 160 calculates various addresses.
+```sh
+./hash160 751e76e8199196d454941c45d1b3a323f1433bd6
+Input Hash160: 751e76e8199196d454941c45d1b3a323f1433bd6
+
+=== Generated Addresses ===
+P2PKH:        1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH
+P2SH:         3CNHUhP3uyB9EUtRLsmvFUmvGdjGdkTxJw
+P2SH-P2WPKH:  3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN
+Bech32:       bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4
+Bech32m:      bc1pw508d6qejxtdg4y5r3zarvary0c5xw7k8e76x7
+P2WSH:        bc1qll0d3pqfmylv9gspe90j5u08uz0xxke6r2sgqynn0ggdj5p67qrq6q6r4v
+P2WSH-P2WPKH: bc1q3qu0094lf9ctzjrhnszmwjuvf9g4kv3dqsp47la2tkdjxawlywtqs5vvrc
+```
 
 ### 📂 Code Structure
-
+```sh
 File Description
 
 **-key.c: Main program, handles input, output, and calls other modules.
@@ -172,6 +243,7 @@ File Description
 -
 **customutil/customutil.c & customutil/customutil.h: Custom functions for generating public key strings.
 -
+```
 ### ⚠️ Security
 Please use this tool with caution, especially with private key generation and handling. Please run it in an offline or secure environment and avoid disclosing your private keys!
 
@@ -184,7 +256,7 @@ Private key disclosure will lead to loss of funds! Please store and manage your 
 
 ### Sponsorship
 If this project has been helpful to you, please consider sponsoring. Your support is greatly appreciated. Thank you!
-
+```sh
 -BTC: bc1qt3nh2e6gjsfkfacnkglt5uqghzvlrr6jahyj2k
 -
 -ETH: 0xD6503e5994bF46052338a9286Bc43bC1c3811Fa1
@@ -193,7 +265,7 @@ If this project has been helpful to you, please consider sponsoring. Your suppor
 -
 -TRX: TAHUmjyzg7B3Nndv264zWYUhQ9HUmX4Xu4
 -
--
+```
 ### ⚠️ Reminder: Do not input real private keys on connected devices!
 -
 -This tool is provided for learning and research purposes only. Please use it with an understanding of the relevant risks. The developers are not responsible for financial losses or legal liability -caused by the use of this tool.
