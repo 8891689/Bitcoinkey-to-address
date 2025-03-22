@@ -1,11 +1,7 @@
-/*
- * base58.c
- *
- * 一个 Base58 与 Base58Check 编码／解码的 C 语言实现，兼容比特币网络标准。
- *
- * 作者：8891689/ChatGPT
+/*base58.c
+ *Author: 8891689
+ *Assist in creation ：ChatGPT 
  */
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
