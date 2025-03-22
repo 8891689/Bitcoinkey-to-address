@@ -1,11 +1,7 @@
-/*
- * bech32.h
- *
- * 内部实现：编码解码 segwit 地址的 C 语言实现，兼容比特币网络标准。
- *
- * 作者：8891689/ChatGPT
+/* bech32.h
+ *Author: 8891689
+ *Assist in creation ：ChatGPT
  */
-
 #ifndef BECH32_H
 #define BECH32_H
 
