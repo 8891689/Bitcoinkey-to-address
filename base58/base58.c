@@ -6,16 +6,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #include "base58.h"
-
-
-#include "../sha256/sha256.h"
-
-/*
- * 注意：此处引用 SHA-256 的头文件采用相对路径，
- * 根据你的工程结构，请确保路径正确。
- */
+#include "sha256.h"
 
 
 /* Bitcoin 使用的 Base58 字母表 */
@@ -23,9 +17,6 @@ static const char *BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghi
 
 /*
  * 内部函数：base58_encode
- *
- * 对输入的二进制数据进行 Base58 编码，返回 malloc 分配的 null 结尾字符串。
- * 调用者需要使用 free() 释放返回的内存。
  */
 static char *base58_encode(const uint8_t *data, size_t data_len) {
     size_t zeros = 0;
@@ -75,17 +66,13 @@ static char *base58_encode(const uint8_t *data, size_t data_len) {
     }
     buffer[b58_len] = '\0';
     return buffer;
+
 }
 
 /*
  * 内部函数：base58_decode
- *
- * 对 Base58 编码字符串进行解码，返回 malloc 分配的二进制数据缓冲区，
- * 并在 result_len 中保存解码后数据长度。
- * 调用者需要使用 free() 释放返回的内存。
  */
 static uint8_t *base58_decode(const char *b58, size_t *result_len) {
-    /* 跳过前导空格 */
     while (*b58 == ' ')
         b58++;
     size_t b58_len = strlen(b58);
@@ -147,9 +134,15 @@ static uint8_t *base58_decode(const char *b58, size_t *result_len) {
  * 然后将数据与校验和拼接后进行 Base58 编码。
  */
 char *base58_encode_check(const uint8_t *data, size_t data_len) {
-    uint8_t hash1[32], hash2[32];
-    sha256(data, data_len, hash1);
-    sha256(hash1, 32, hash2);
+   uint8_t hash1[SHA256_BLOCK_SIZE], hash2[SHA256_BLOCK_SIZE];  // 使用 SHA256_BLOCK_SIZE
+    SHA256_CTX ctx;
+    sha256_init(&ctx);
+    sha256_update(&ctx, data, data_len);
+    sha256_final(&ctx, hash1);
+
+    sha256_init(&ctx);
+    sha256_update(&ctx, hash1, SHA256_BLOCK_SIZE);
+    sha256_final(&ctx, hash2);
 
     size_t new_len = data_len + 4;
     uint8_t *buffer = malloc(new_len);
@@ -165,7 +158,6 @@ char *base58_encode_check(const uint8_t *data, size_t data_len) {
 
 /*
  * Base58Check 解码：
- * 解码 Base58Check 字符串并验证校验和（前提是编码数据至少含 4 字节校验和）。
  */
 uint8_t *base58_decode_check(const char *b58, size_t *result_len) {
     size_t bin_len;
@@ -185,9 +177,15 @@ uint8_t *base58_decode_check(const char *b58, size_t *result_len) {
     }
     memcpy(payload, bin, payload_len);
 
-    uint8_t hash1[32], hash2[32];
-    sha256(payload, payload_len, hash1);
-    sha256(hash1, 32, hash2);
+    uint8_t hash1[SHA256_BLOCK_SIZE], hash2[SHA256_BLOCK_SIZE]; // 使用 SHA256_BLOCK_SIZE
+    SHA256_CTX ctx;
+    sha256_init(&ctx);
+    sha256_update(&ctx, payload, payload_len);
+    sha256_final(&ctx, hash1);
+
+    sha256_init(&ctx);
+    sha256_update(&ctx, hash1, SHA256_BLOCK_SIZE);
+    sha256_final(&ctx, hash2);
 
     if (memcmp(hash2, bin + payload_len, 4) != 0) {
         free(bin);
@@ -204,8 +202,8 @@ uint8_t *base58_decode_check(const char *b58, size_t *result_len) {
  * 以下为对外接口的包装函数，调整了函数名称以适配你的代码：
  */
 
-/* 
- * b58enc - 封装 base58_encode，将 malloc 分配的字符串复制到用户提供的缓冲区。
+/*
+ * b58enc - 封装 base58_encode
  */
 int b58enc(char *b58, size_t *b58len, const uint8_t *bin, size_t binlen) {
     char *encoded = base58_encode(bin, binlen);
@@ -223,10 +221,9 @@ int b58enc(char *b58, size_t *b58len, const uint8_t *bin, size_t binlen) {
 }
 
 /*
- * b58tobin - 封装 base58_decode，将解码后的数据复制到用户提供的缓冲区。
+ * b58tobin - 封装 base58_decode
  */
 int b58tobin(uint8_t *bin, size_t *binlen, const char *b58, size_t b58len) {
-    /* 复制 b58 字符串到临时缓冲区以确保 null 结尾 */
     char *temp = malloc(b58len + 1);
     if (!temp)
         return 0;
@@ -247,4 +244,3 @@ int b58tobin(uint8_t *bin, size_t *binlen, const char *b58, size_t b58len) {
     free(decoded);
     return 1;
 }
-
