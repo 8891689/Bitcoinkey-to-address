@@ -234,7 +234,7 @@ P2WSH (from P2WPKH script):bc1q3qu0094lf9ctzjrhnszmwjuvf9g4kv3dqsp47la2tkdjxawly
 
 ```
 
-### ⚙️ Dependencies
+### Thanks
 
 Thanks to: gemini, ChatGPT.
 
