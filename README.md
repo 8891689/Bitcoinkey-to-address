@@ -253,6 +253,6 @@ TRX: TAHUmjyzg7B3Nndv264zWYUhQ9HUmX4Xu4
 
 ```
 ### ⚠️ Reminder: Do not input real private keys on connected devices!
--
--This tool is provided for learning and research purposes only. Please use it with an understanding of the relevant risks. The developers are not responsible for financial losses or legal liability -caused by the use of this tool.
--
+
+This tool is provided for learning and research purposes only. Please use it with an understanding of the relevant risks. The developers are not responsible for financial losses or legal liability -caused by the use of this tool.
+
