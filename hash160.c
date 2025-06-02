@@ -167,7 +167,7 @@ int main(int argc, char **argv) {
     // * non-standard: witness program is SHA256 of the input Hash160, not SHA256 of a redeem script.
 
     addr = hash_to_address(hash_hex, "P2WSH-P2WPKH"); // P2WSH with program = SHA256(0014{input_hash160})
-    if (addr != NULL) { printf("P2WSH (from P2WPKH script):%s\n", addr); free(addr); }
+    if (addr != NULL) { printf("P2WSH (P2WPKH script):    %s\n", addr); free(addr); }
 
     return 0;
 }
