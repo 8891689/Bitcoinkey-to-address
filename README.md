@@ -36,31 +36,24 @@ Supports generating the following types of Bitcoin addresses:
 
 ## 🛠️ Dependencies
 
--   No dependencies are required, just download the compiler and compile directly.
+1. No dependencies are required, just download the compiler and compile directly.
 
-### Custom Modules:
 
--  ** `ripemd160`
--  ** `base58`
--  ** `bech32`
--  ** `secp256k1`
--  ** `sha256`
 
-Markdown
 
 2. Compile the code:
-```sh
-	gcc -O3 -o key key.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c secp256k1/secp256k1.c
-	gcc -O3 -o skey simple.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c secp256k1/secp256k1.c
-	gcc -O3 -o p public.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c secp256k1/secp256k1.c
-	gcc -O3 -o h hash160.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c
 ```
-or
+gcc -O3 -o key key.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c secp256k1/secp256k1.c
+gcc -O3 -o skey simple.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c secp256k1/secp256k1.c
+gcc -O3 -o p public.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c secp256k1/secp256k1.c
+gcc -O3 -o h hash160.c sha256/sha256.c base58/base58.c bech32/bech32.c ripemd160/ripemd160.c
+```
+3. or
 ```sh
 make
 
 ```
-Clean Rebuild
+4. Clean Rebuild
 ```
 make clean
 ```
@@ -243,19 +236,21 @@ P2WSH (from P2WPKH script):bc1q3qu0094lf9ctzjrhnszmwjuvf9g4kv3dqsp47la2tkdjxawly
 
 ### ⚙️ Dependencies
 
-** Thanks to: gemini2.0, ChatGPT-o3mini, Luis Alberto, albertobsd, Bosselaers, Kent "ethereal" Williams-King, and Luke Dashjr.
+Thanks to: gemini, ChatGPT.
 
 ### Sponsorship
+
 If this project has been helpful to you, please consider sponsoring. Your support is greatly appreciated. Thank you!
+
 ```sh
--BTC: bc1qt3nh2e6gjsfkfacnkglt5uqghzvlrr6jahyj2k
--
--ETH: 0xD6503e5994bF46052338a9286Bc43bC1c3811Fa1
--
--DOGE: DTszb9cPALbG9ESNJMFJt4ECqWGRCgucky
--
--TRX: TAHUmjyzg7B3Nndv264zWYUhQ9HUmX4Xu4
--
+BTC: bc1qt3nh2e6gjsfkfacnkglt5uqghzvlrr6jahyj2k
+
+ETH: 0xD6503e5994bF46052338a9286Bc43bC1c3811Fa1
+
+DOGE: DTszb9cPALbG9ESNJMFJt4ECqWGRCgucky
+
+TRX: TAHUmjyzg7B3Nndv264zWYUhQ9HUmX4Xu4
+
 ```
 ### ⚠️ Reminder: Do not input real private keys on connected devices!
 -
